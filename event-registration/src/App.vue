@@ -1,7 +1,9 @@
 
 <template>
-  <main>
-    Hello, Event Registration!
+  <main class="container mx-auto my-8 space-y-8">
+    <h1 class="text-4xl fount-medium">Event Booking</h1>
+    <h2 class="text-2xl fount-medium">All Events</h2>
+    <h2 class="text-2xl fount-medium">Your bookings</h2>
   </main>
 </template>
 
