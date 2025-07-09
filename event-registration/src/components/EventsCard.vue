@@ -6,16 +6,14 @@
   <p class="p-4 font-medium text-xl border-b border-gray-200">{{description}}</p>
 
   <section class="flex justify-end p-4">
-    <button @click="$emit('register')"
-    class="text-sm bg-slate-500 text-white px-4 py-2 rounded-4xl hover:bg-amber-500 transition-colors">
-      Register
-    </button>
+    <Button label="Register" @click="$emit('register')"/>
   </section>
 </div>
 
 </template>
 
 <script setup>
+import Button from '@/components/Button.vue';
 // This is a simple component to display event details.
 defineProps({
   title: String,
