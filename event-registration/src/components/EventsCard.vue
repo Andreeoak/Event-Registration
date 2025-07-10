@@ -1,22 +1,30 @@
 <template>
 
-<RoundedCard>
-  <h3 class="p-4 font-medium text-xl border-b border-gray-200">{{title}}</h3>
-  <p class="p-4 font-medium text-xl border-b border-gray-200">{{when}}</p>
-  <p class="p-4 font-medium text-xl border-b border-gray-200">{{description}}</p>
+<SectionCard>
+  <template #header>
+      {{title}}
+  </template>
+    {{ when }}
+  <template #footer>
+    <div class="space-y-4">
+      <p class="p-4 font-medium text-xl border-b border-gray-200">
+        {{description}}
+      </p>
 
-  <section class="flex justify-end p-4">
-    <RoundButton  @click="$emit('register')">
-      Register
-    </RoundButton>
-  </section>
-</RoundedCard>
+      <div class="flex justify-end p-4">
+        <RoundButton  @click="$emit('register')">
+          Register
+        </RoundButton>
+      </div>
+    </div>
+  </template>
+</SectionCard>
 
 </template>
 
 <script setup>
 import RoundButton from '@/components/RoundButton.vue';
-import RoundedCard from '@/components/RoundedCard.vue';
+import SectionCard from '@/components/SectionCard.vue';
 // This is a simple component to display event details.
 defineProps({
   title: String,
