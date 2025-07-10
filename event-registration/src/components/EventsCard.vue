@@ -1,6 +1,6 @@
 <template>
 
-<div class="border border-gray-500 bg-white rounded-r-md">
+<RoundedCard>
   <h3 class="p-4 font-medium text-xl border-b border-gray-200">{{title}}</h3>
   <p class="p-4 font-medium text-xl border-b border-gray-200">{{when}}</p>
   <p class="p-4 font-medium text-xl border-b border-gray-200">{{description}}</p>
@@ -10,12 +10,13 @@
       Register
     </RoundButton>
   </section>
-</div>
+</RoundedCard>
 
 </template>
 
 <script setup>
 import RoundButton from '@/components/RoundButton.vue';
+import RoundedCard from '@/components/RoundedCard.vue';
 // This is a simple component to display event details.
 defineProps({
   title: String,

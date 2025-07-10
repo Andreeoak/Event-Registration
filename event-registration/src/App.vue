@@ -7,9 +7,13 @@
       <EventCard v-for="i in 8" :key="i" @register="console.log('Registered!')"/>
     </section>
     <h2 class="text-2xl fount-medium">Your bookings</h2>
+    <section class="grid grid-cols-1 gap-8">
+      <BookingItem v-for="i in 3" :key="i" />
+    </section>
   </main>
 </template>
 
 <script setup>
 import EventCard from '@/components/EventsCard.vue';
+import BookingItem from './components/BookingItem.vue';
 </script>
