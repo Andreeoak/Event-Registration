@@ -1,15 +1,13 @@
 
 <template>
-  <RoundedCard>
-    <div class="p-4">
-      Booking Item
-    </div>
-  </RoundedCard>
+  <SectionCard>
+    Booking Item
+  </SectionCard>
 </template>
 
 
 <script setup>
-import RoundedCard from '@/components/RoundedCard.vue';
+import SectionCard from '@/components/SectionCard.vue';
 
 </script>
 
