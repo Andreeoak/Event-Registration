@@ -6,14 +6,14 @@
   <p class="p-4 font-medium text-xl border-b border-gray-200">{{description}}</p>
 
   <section class="flex justify-end p-4">
-    <Button label="Register" @click="$emit('register')"/>
+    <RoundButton label="Register" @click="$emit('register')"/>
   </section>
 </div>
 
 </template>
 
 <script setup>
-import Button from '@/components/Button.vue';
+import RoundButton from '@/components/RoundButton.vue';
 // This is a simple component to display event details.
 defineProps({
   title: String,
