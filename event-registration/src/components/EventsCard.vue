@@ -6,7 +6,9 @@
   <p class="p-4 font-medium text-xl border-b border-gray-200">{{description}}</p>
 
   <section class="flex justify-end p-4">
-    <RoundButton label="Register" @click="$emit('register')"/>
+    <RoundButton  @click="$emit('register')">
+      Register
+    </RoundButton>
   </section>
 </div>
 
