@@ -10,14 +10,14 @@
           :title="event.title"
           :when="event.date"
           :description="event.description"
-          @register="handleRegistration(event)"
+          @register="() => handleRegistration(event)"
         />
       </template>
       <template v-else>
         <LoadingEventCard v-for="i in 4" :key="i" />
       </template>
     </section>
-    <h2 class="text-2xl fount-medium">Your bookings</h2>
+    <h2 class="text-2xl font-medium">Your bookings</h2>
     <section class="grid grid-cols-1 gap-8">
       <template v-if="!bookingLoading">
         <BookingItem
@@ -25,6 +25,7 @@
           :key="booking.id"
           :title="booking.eventTitle"
           :status="booking.status"
+          @canceled="cancelBooking(booking.id)"
         />
       </template>
       <template v-else>
@@ -83,7 +84,7 @@ const handleRegistration = async (event) => {
     })
 
     if (response.ok) {
-      const index = bookings.value.findIndex((b) => b.id === newBooking.id)
+      const index = findBookingById(newBooking.id)
       bookings.value[index] = await response.json()
     } else {
       throw new Error('Failed to confirm booking')
@@ -104,6 +105,28 @@ const fetchBooking = async () => {
     bookings.value = await response.json()
   } finally {
     bookingLoading.value = false
+  }
+}
+
+const findBookingById = (id) => {
+  return bookings.value.findIndex((b) => b.id === id)
+}
+
+const cancelBooking = async (bookingId) => {
+  const index = findBookingById(bookingId)
+  const originalBooking = bookings.value[index]
+  bookings.value.splice(index, 1)
+
+  try {
+    const response = await fetch(`http://localhost:3001/bookings/${bookingId}`, {
+      method: 'DELETE',
+    })
+    if (!response.ok) {
+      throw new Error('Booking could not be cancelled')
+    }
+  } catch (e) {
+    console.error('Failed to cancel booking: ', e)
+    bookings.value.splice(index, 0, originalBooking)
   }
 }
 
