@@ -1,7 +1,7 @@
 <template>
   <main class="container mx-auto my-8 space-y-8">
-    <h1 class="text-4xl fount-medium">Event Booking</h1>
-    <h2 class="text-2xl fount-medium">All Events</h2>
+    <h1 class="text-4xl font-medium">Event Booking</h1>
+    <h2 class="text-2xl font-medium">All Events</h2>
     <section class="grid grid-cols-2 gap-8">
       <template v-if="!eventsLoading">
         <EventCard
@@ -10,7 +10,7 @@
           :title="event.title"
           :when="event.date"
           :description="event.description"
-          @register="() => handleRegistration(event)"
+          @register="handleRegistration(event)"
         />
       </template>
       <template v-else>
@@ -108,9 +108,7 @@ const fetchBooking = async () => {
   }
 }
 
-const findBookingById = (id) => {
-  return bookings.value.findIndex((b) => b.id === id)
-}
+const findBookingById = (id) => bookings.value.findIndex((b) => b.id === id)
 
 const cancelBooking = async (bookingId) => {
   const index = findBookingById(bookingId)
