@@ -29,5 +29,20 @@
       "location": "Convention Center, Downtown"
     }
   ],
-  "bookings": []
+  "bookings": [
+    {
+      "id": "1752427420500",
+      "userId": 1,
+      "eventId": "1",
+      "eventTitle": "Rails Conference 2024",
+      "status": "confirmed"
+    },
+    {
+      "id": "1752430071907",
+      "userId": 1,
+      "eventId": "4",
+      "eventTitle": "Rust Conference 2021",
+      "status": "confirmed"
+    }
+  ]
 }

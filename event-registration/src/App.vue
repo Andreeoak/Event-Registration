@@ -19,7 +19,12 @@
     </section>
     <h2 class="text-2xl fount-medium">Your bookings</h2>
     <section class="grid grid-cols-1 gap-8">
-      <BookingItem v-for="i in 3" :key="i" />
+      <template v-if="!bookingLoading">
+        <BookingItem v-for="booking in bookings" :key="booking.id" :title="booking.eventTitle" />
+      </template>
+      <template v-else>
+        <LoadingBookingItem v-for="i in 3" :key="i" />
+      </template>
     </section>
   </main>
 </template>
@@ -27,11 +32,14 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import EventCard from '@/components/EventsCard.vue'
-import BookingItem from './components/BookingItem.vue'
-import LoadingEventCard from './components/LoadingEventCard.vue'
+import BookingItem from '@/components/BookingItem.vue'
+import LoadingEventCard from '@/components/LoadingEventCard.vue'
+import LoadingBookingItem from '@/components/LoadingBookingItem.vue'
 
 const events = ref([])
 const eventsLoading = ref(false)
+const bookingLoading = ref(false)
+const bookings = ref([])
 
 const fetchEvents = async () => {
   eventsLoading.value = true
@@ -61,5 +69,21 @@ const handleRegistration = async (event) => {
   })
 }
 
-onMounted(() => fetchEvents())
+const fetchBooking = async () => {
+  try {
+    bookingLoading.value = true
+    const response = await fetch('http://localhost:3001/bookings?userId=1', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    })
+    bookings.value = await response.json()
+  } finally {
+    bookingLoading.value = false
+  }
+}
+
+onMounted(() => {
+  fetchEvents()
+  fetchBooking()
+})
 </script>
