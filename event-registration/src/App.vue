@@ -57,7 +57,10 @@ const handleRegistration = async (event) => {
     userId: 1,
     eventId: event.id,
     eventTitle: event.title,
+    status: 'pending',
   }
+
+  bookings.value.push(newBooking)
 
   await fetch('http://localhost:3001/bookings', {
     method: 'POST',
