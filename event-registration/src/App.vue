@@ -3,13 +3,16 @@
   <main class="container mx-auto my-8 space-y-8">
     <h1 class="text-4xl fount-medium">Event Booking</h1>
     <h2 class="text-2xl fount-medium">All Events</h2>
-    <section class="grid grid-cols-2 gap-8">
+    <section class="grid grid-cols-2 gap-8" v-if ="!eventsLoading">
       <EventCard v-for="event in events"
       :key="event.id"
       :title="event.title"
       :when="event.date"
       :description="event.description"
       @register="console.log('Registered!')"/>
+    </section>
+    <section v-else>
+      Loading Events ...
     </section>
     <h2 class="text-2xl fount-medium">Your bookings</h2>
     <section class="grid grid-cols-1 gap-8">
@@ -24,9 +27,15 @@ import EventCard from '@/components/EventsCard.vue';
 import BookingItem from './components/BookingItem.vue';
 
 const events = ref([]);
+const eventsLoading = ref(false);
 const fetchEvents= async ()=>{
+  eventsLoading.value = true;
+  try{
     const response = await fetch("http://localhost:3001/events");
     events.value = await response.json();
+  } finally{
+    eventsLoading.value = false;
+  }
 }
 
 onMounted(()=>fetchEvents());
