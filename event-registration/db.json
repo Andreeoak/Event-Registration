@@ -36,13 +36,6 @@
       "eventId": "1",
       "eventTitle": "Rails Conference 2024",
       "status": "confirmed"
-    },
-    {
-      "id": "1752610830933",
-      "userId": 1,
-      "eventId": "4",
-      "eventTitle": "Rust Conference 2021",
-      "status": "confirmed"
     }
   ]
 }

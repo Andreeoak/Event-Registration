@@ -5,7 +5,7 @@
     <EventList @register="handleRegistration($event)" />
     <h2 class="text-2xl font-medium">Your bookings</h2>
     <section class="grid grid-cols-1 gap-8">
-      <template v-if="!bookingLoading">
+      <template v-if="!loading">
         <BookingItem
           v-for="booking in bookings"
           :key="booking.id"
@@ -22,15 +22,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 
 import EventList from '@/components/EventList.vue'
 import BookingItem from '@/components/BookingItem.vue'
-
 import LoadingBookingItem from '@/components/LoadingBookingItem.vue'
+import useBookings from '@/composables/useBookings'
 
-const bookingLoading = ref(false)
-const bookings = ref([])
+const { bookings, loading, fetchBooking } = useBookings()
 
 const handleRegistration = async (event) => {
   if (bookings.value.some((booking) => booking.eventId === event.id && booking.userId === 1)) {
@@ -67,19 +66,6 @@ const handleRegistration = async (event) => {
   } catch (e) {
     console.error('Failed to register for event: ', e)
     bookings.value = bookings.value.filter((b) => b.id !== newBooking.id)
-  }
-}
-
-const fetchBooking = async () => {
-  try {
-    bookingLoading.value = true
-    const response = await fetch('http://localhost:3001/bookings?userId=1', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    })
-    bookings.value = await response.json()
-  } finally {
-    bookingLoading.value = false
   }
 }
 
