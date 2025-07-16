@@ -36,6 +36,13 @@
       "eventId": "4",
       "eventTitle": "Rust Conference 2021",
       "status": "confirmed"
+    },
+    {
+      "id": "1752702905054",
+      "userId": 1,
+      "eventId": "4",
+      "eventTitle": "Rust Conference 2021",
+      "status": "confirmed"
     }
   ]
 }
