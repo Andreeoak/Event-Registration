@@ -1,7 +1,7 @@
 <template>
   <SectionCard>
     <div class="flex justify-between">
-      <div class="flec space-x-2">
+      <div class="flex space-x-2">
         <div>{{ title }}</div>
         <div><component :is="icon" :class="{ 'animate-spin': pending }" /></div>
       </div>
