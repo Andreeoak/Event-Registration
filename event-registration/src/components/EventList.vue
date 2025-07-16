@@ -37,7 +37,7 @@
               :title="event.title"
               :when="event.date"
               :description="event.description"
-              @register="$emit('register', event)"
+              @register="handleRegistration(event)"
             />
           </template>
           <template v-else>
@@ -59,7 +59,10 @@ import { ref, onMounted } from 'vue'
 import EventCard from '@/components/EventsCard.vue'
 import LoadingEventCard from '@/components/LoadingEventCard.vue'
 import SectionCard from '@/components/SectionCard.vue'
-import RoundButton from './RoundButton.vue'
+import RoundButton from '@/components/RoundButton.vue'
+import useBookings from '@/composables/useBookings'
+
+const { handleRegistration } = useBookings()
 
 const events = ref([])
 const loading = ref(false)
@@ -77,8 +80,6 @@ const fetchEvents = async () => {
     loading.value = false
   }
 }
-
-defineEmits(['register'])
 
 onMounted(() => fetchEvents())
 </script>
